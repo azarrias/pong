@@ -1,6 +1,13 @@
 # Prerequisites
 *.d
 
+# Project files
+.project
+
+# CDT
+.cproject
+.autotools
+
 # Compiled Object files
 *.slo
 *.lo
@@ -30,3 +37,7 @@
 *.exe
 *.out
 *.app
+/Debug/
+
+# Others
+.settings/
