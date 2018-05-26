@@ -12,17 +12,26 @@
 // Screen dimension constants
 const int SCREEN_WIDTH = 800;
 const int SCREEN_HEIGHT = 600;
+const int PADDLE_BORDER_OFFSET = 20;
+const int PADDLE_HEIGHT = 100;
+const int PADDLE_WIDTH = 20;
+const int BALL_HEIGHT = 20;
+const int BALL_WIDTH = 20;
 
 // The window we'll be rendering to
 SDL_Window *gWindow = nullptr;
+SDL_Renderer *gRenderer = nullptr;
 
-// The surface contained by the window
-SDL_Surface *gScreenSurface = nullptr;
+// Game objects
+SDL_Rect PlayerOnePaddle;
+SDL_Rect PlayerTwoPaddle;
+SDL_Rect Ball;
 
 void Close();
 bool Init();
-void Update();
 void Render();
+void SetRect(SDL_Rect &rect, int xPos, int yPos, int width, int height);
+void Update();
 
 int main(int argc, char* args[])
 {
@@ -56,9 +65,6 @@ int main(int argc, char* args[])
 
 void Close()
 {
-	SDL_FreeSurface(gScreenSurface);
-	gScreenSurface = nullptr;
-
 	SDL_DestroyWindow(gWindow);
 	gWindow = nullptr;
 
@@ -82,27 +88,51 @@ bool Init()
 
 	gWindow = SDL_CreateWindow("Pong", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
 			SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
-
 	if(!gWindow)
 	{
 		std::cout << "Window could not be created! SDL_Error: " << SDL_GetError() << "\n";
 		return false;
 	}
-	else
+
+	// Create vsynced renderer for window
+	gRenderer = SDL_CreateRenderer(gWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+	if(!gRenderer)
 	{
-		// Get window surface
-		gScreenSurface = SDL_GetWindowSurface(gWindow);
+		std::cout << "Renderer could not be created! SDL Error: " << SDL_GetError() << "\n";
+		return false;
 	}
+
+	SetRect(PlayerOnePaddle, PADDLE_BORDER_OFFSET, SCREEN_HEIGHT / 2 - PADDLE_HEIGHT / 2, PADDLE_WIDTH, PADDLE_HEIGHT);
+	SetRect(PlayerTwoPaddle, SCREEN_WIDTH - PADDLE_BORDER_OFFSET - PADDLE_WIDTH, SCREEN_HEIGHT / 2 - PADDLE_HEIGHT / 2, PADDLE_WIDTH, PADDLE_HEIGHT);
+	SetRect(Ball, SCREEN_WIDTH / 2 - BALL_WIDTH / 2, SCREEN_HEIGHT / 2 - BALL_HEIGHT / 2, BALL_WIDTH, BALL_HEIGHT);
 
 	return true;
 }
 
-void Update()
+void Render()
 {
+	// Set background render color to black and clear window
+	SDL_SetRenderDrawColor(gRenderer, 0x00, 0x00, 0x00, 0xFF);
+	SDL_RenderClear(gRenderer);
 
+	// Set render color to white and render all objects
+	SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+	SDL_RenderFillRect(gRenderer, &PlayerOnePaddle);
+	SDL_RenderFillRect(gRenderer, &PlayerTwoPaddle);
+	SDL_RenderFillRect(gRenderer, &Ball);
+
+	SDL_RenderPresent(gRenderer);
 }
 
-void Render()
+void SetRect(SDL_Rect &rect, int xPos, int yPos, int width, int height)
+{
+	rect.h = height;
+	rect.w = width;
+	rect.x = xPos;
+	rect.y = yPos;
+}
+
+void Update()
 {
 
 }
