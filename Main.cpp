@@ -31,7 +31,7 @@ void Close();
 bool Init();
 void Render();
 void SetRect(SDL_Rect &rect, int xPos, int yPos, int width, int height);
-void Update();
+bool Update();
 
 int main(int argc, char* args[])
 {
@@ -41,20 +41,11 @@ int main(int argc, char* args[])
 		return -1;
 	}
 
-	bool quit = false;
-	SDL_Event e;
+	bool run = true;
 
-	while(!quit)
+	while(run)
 	{
-		while(SDL_PollEvent(&e))
-		{
-			if(e.type == SDL_QUIT)
-			{
-				quit = true;
-			}
-		}
-
-		Update();
+		run = Update();
 		Render();
 	}
 
@@ -67,6 +58,9 @@ void Close()
 {
 	SDL_DestroyWindow(gWindow);
 	gWindow = nullptr;
+
+	SDL_DestroyRenderer(gRenderer);
+	gRenderer = nullptr;
 
 	TTF_Quit();
 	SDL_Quit();
@@ -132,7 +126,27 @@ void SetRect(SDL_Rect &rect, int xPos, int yPos, int width, int height)
 	rect.y = yPos;
 }
 
-void Update()
+bool Update()
 {
+	SDL_Event e;
 
+	while(SDL_PollEvent(&e))
+	{
+		if(e.type == SDL_QUIT)
+		{
+			return false;
+		}
+
+		if(e.type == SDL_KEYDOWN)
+		{
+			switch(e.key.keysym.sym)
+			{
+				case SDLK_ESCAPE:
+					return false;
+					break;
+			}
+		}
+	}
+
+	return true;
 }
