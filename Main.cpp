@@ -5,32 +5,23 @@
  *      Author: adolfo
  */
 
+#include "GameObject.h"
+#include "Globals.h"
 #include <iostream>
-#include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
-
-// Screen dimension constants
-const int SCREEN_WIDTH = 800;
-const int SCREEN_HEIGHT = 600;
-const int PADDLE_BORDER_OFFSET = 20;
-const int PADDLE_HEIGHT = 100;
-const int PADDLE_WIDTH = 20;
-const int BALL_HEIGHT = 20;
-const int BALL_WIDTH = 20;
 
 // The window we'll be rendering to
 SDL_Window *gWindow = nullptr;
 SDL_Renderer *gRenderer = nullptr;
 
 // Game objects
-SDL_Rect PlayerOnePaddle;
-SDL_Rect PlayerTwoPaddle;
-SDL_Rect Ball;
+GameObject *gPlayerOnePaddle;
+GameObject *gPlayerTwoPaddle;
+GameObject *gBall;
 
 void Close();
 bool Init();
 void Render();
-void SetRect(SDL_Rect &rect, int xPos, int yPos, int width, int height);
 bool Update();
 
 int main(int argc, char* args[])
@@ -96,9 +87,9 @@ bool Init()
 		return false;
 	}
 
-	SetRect(PlayerOnePaddle, PADDLE_BORDER_OFFSET, SCREEN_HEIGHT / 2 - PADDLE_HEIGHT / 2, PADDLE_WIDTH, PADDLE_HEIGHT);
-	SetRect(PlayerTwoPaddle, SCREEN_WIDTH - PADDLE_BORDER_OFFSET - PADDLE_WIDTH, SCREEN_HEIGHT / 2 - PADDLE_HEIGHT / 2, PADDLE_WIDTH, PADDLE_HEIGHT);
-	SetRect(Ball, SCREEN_WIDTH / 2 - BALL_WIDTH / 2, SCREEN_HEIGHT / 2 - BALL_HEIGHT / 2, BALL_WIDTH, BALL_HEIGHT);
+	gPlayerOnePaddle = new GameObject(PADDLE_BORDER_OFFSET, SCREEN_HEIGHT / 2 - PADDLE_HEIGHT / 2, PADDLE_WIDTH, PADDLE_HEIGHT);
+	gPlayerTwoPaddle = new GameObject(SCREEN_WIDTH - PADDLE_BORDER_OFFSET - PADDLE_WIDTH, SCREEN_HEIGHT / 2 - PADDLE_HEIGHT / 2, PADDLE_WIDTH, PADDLE_HEIGHT);
+	gBall = new GameObject(SCREEN_WIDTH / 2 - BALL_WIDTH / 2, SCREEN_HEIGHT / 2 - BALL_HEIGHT / 2, BALL_WIDTH, BALL_HEIGHT);
 
 	return true;
 }
@@ -111,19 +102,11 @@ void Render()
 
 	// Set render color to white and render all objects
 	SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
-	SDL_RenderFillRect(gRenderer, &PlayerOnePaddle);
-	SDL_RenderFillRect(gRenderer, &PlayerTwoPaddle);
-	SDL_RenderFillRect(gRenderer, &Ball);
+	SDL_RenderFillRect(gRenderer, gPlayerOnePaddle->GetRect());
+	SDL_RenderFillRect(gRenderer, gPlayerTwoPaddle->GetRect());
+	SDL_RenderFillRect(gRenderer, gBall->GetRect());
 
 	SDL_RenderPresent(gRenderer);
-}
-
-void SetRect(SDL_Rect &rect, int xPos, int yPos, int width, int height)
-{
-	rect.h = height;
-	rect.w = width;
-	rect.x = xPos;
-	rect.y = yPos;
 }
 
 bool Update()
@@ -137,16 +120,36 @@ bool Update()
 			return false;
 		}
 
-		if(e.type == SDL_KEYDOWN)
+		if(e.type == SDL_KEYDOWN && e.key.repeat == 0)
 		{
 			switch(e.key.keysym.sym)
 			{
 				case SDLK_ESCAPE:
 					return false;
 					break;
+				case SDLK_w:
+					gPlayerOnePaddle->m_velocity.y -= PADDLE_VELOCITY_DELTA;
+					break;
+				case SDLK_s:
+					gPlayerOnePaddle->m_velocity.y += PADDLE_VELOCITY_DELTA;
+					break;
+			}
+		}
+		else if(e.type == SDL_KEYUP && e.key.repeat == 0)
+		{
+			switch(e.key.keysym.sym)
+			{
+				case SDLK_w:
+					gPlayerOnePaddle->m_velocity.y += PADDLE_VELOCITY_DELTA;
+					break;
+				case SDLK_s:
+					gPlayerOnePaddle->m_velocity.y -= PADDLE_VELOCITY_DELTA;
+					break;
 			}
 		}
 	}
+
+	gPlayerOnePaddle->UpdatePos();
 
 	return true;
 }
