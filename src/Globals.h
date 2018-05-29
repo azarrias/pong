@@ -8,6 +8,8 @@
 #ifndef GLOBALS_H_
 #define GLOBALS_H_
 
+class GameManager;
+
 // Game setup constants
 const int SCREEN_WIDTH = 800;
 const int SCREEN_HEIGHT = 600;
@@ -17,5 +19,15 @@ const int PADDLE_WIDTH = 20;
 const int BALL_HEIGHT = 20;
 const int BALL_WIDTH = 20;
 const int PADDLE_VELOCITY_DELTA = 10;
+
+enum MainState
+{
+	MAIN_INIT,
+	MAIN_UPDATE,
+	MAIN_CLEANUP,
+	MAIN_EXIT
+};
+
+extern GameManager *game;
 
 #endif /* GLOBALS_H_ */
