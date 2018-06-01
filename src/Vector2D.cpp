@@ -6,6 +6,7 @@
  */
 
 #include <cmath>
+#include <iostream>
 #include "Vector2D.h"
 
 template <typename RealType>
@@ -56,10 +57,10 @@ const Vector2D<RealType>& Vector2D<RealType>::operator /=(RealType scalar)
 }
 
 template <typename RealType>
-void Vector2D<RealType>::Set(RealType x, RealType y)
+std::ostream& Vector2D<RealType>::Display(std::ostream& output) const
 {
-	mX = x;
-	mY = y;
+	output << "(" << mX << ", " << mY << ")";
+	return output;
 }
 
 template <typename RealType>
@@ -73,6 +74,13 @@ Vector2D<RealType>& Vector2D<RealType>::Normalize()
 {
 	*this /= Length();
 	return *this;
+}
+
+template <typename RealType>
+void Vector2D<RealType>::Set(RealType x, RealType y)
+{
+	mX = x;
+	mY = y;
 }
 
 template <typename RealType>
@@ -91,7 +99,7 @@ const Vector2D<RealType> operator -(Vector2D<RealType> v1, const Vector2D<RealTy
 	return v1;
 }
 
-template <class RealType = float>
+template <class RealType>
 const Vector2D<RealType> operator *(Vector2D<RealType> v, RealType scalar)
 {
 	v.mX *= scalar;
@@ -99,16 +107,22 @@ const Vector2D<RealType> operator *(Vector2D<RealType> v, RealType scalar)
 	return v;
 }
 
-template <class RealType = float>
+template <class RealType>
 const Vector2D<RealType> operator *(RealType scalar, Vector2D<RealType> v)
 {
 	return v * scalar;
 }
 
-template <class RealType = float>
+template <class RealType>
 const Vector2D<RealType> operator /(Vector2D<RealType> v, RealType scalar)
 {
 	v.mX /= scalar;
 	v.mY /= scalar;
 	return v;
+}
+
+template <class RealType>
+std::ostream& operator <<(std::ostream& output, const Vector2D<RealType>& v)
+{
+	return v.Display(output);
 }
