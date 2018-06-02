@@ -10,6 +10,27 @@
 
 #include <random>
 
+template<typename RealType>
+struct Distribution {};
+
+template<>
+struct Distribution<int>
+{
+	typedef std::uniform_int_distribution<int> type;
+};
+
+template<>
+struct Distribution<float>
+{
+	typedef std::uniform_real_distribution<float> type;
+};
+
+template<>
+struct Distribution<double>
+{
+	typedef std::uniform_real_distribution<double> type;
+};
+
 class Random
 {
 public:
@@ -24,12 +45,13 @@ public:
 	}
 
 	// Generate random number between low and high (both included)
-	static int GetRandomInt(int low, int high)
+	template <typename RealType>
+	static RealType GetRandom(RealType low, RealType high)
 	{
 		if (!mSeeded)
 			Seed();
 
-		return std::uniform_int_distribution<int>(low, high)(rng_engine);
+		return typename Distribution<RealType>::type(low, high)(rng_engine);
 	}
 private:
 	static bool mSeeded;

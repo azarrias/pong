@@ -10,6 +10,7 @@
 #include "Globals.h"
 #include <iostream>
 #include <SDL2/SDL_ttf.h>
+#include "Vector2D.inl"
 
 GameManager *game = nullptr;
 
@@ -19,6 +20,10 @@ int main(int argc, char* args[])
 	std::cout << "*** Game Creation\n";
 	game = new GameManager();
 	MainState state = MainState::MAIN_INIT;
+
+	Vector2Di c(2, 3);
+	Vector2Di v(c);
+	std::cout << v << "\n";
 
 	while (state != MainState::MAIN_EXIT)
 	{
