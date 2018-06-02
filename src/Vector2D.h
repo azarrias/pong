@@ -28,7 +28,6 @@ public:
 	Vector2D& Normalize();
 	void Set(RealType x, RealType y);
 
-private:
 	RealType mX, mY;
 };
 

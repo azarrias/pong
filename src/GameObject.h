@@ -9,18 +9,30 @@
 #define GAMEOBJECT_H_
 
 #include <SDL2/SDL.h>
+#include "Vector2D.inl"
 
-SDL_Point typedef Velocity;
+enum GameObjectType
+{
+	BALL,
+	PADDLE,
+	UNKNOWN
+};
 
 class GameObject
 {
 public:
-	GameObject(int xPos, int yPos, int width, int height);
+	GameObject();
+	GameObject(GameObjectType type, int xPos, int yPos, int width, int height);
+	virtual ~GameObject();
+
 	SDL_Rect* GetRect();
-	void UpdatePos();
-	Velocity m_velocity;
-private:
-	SDL_Rect m_rect;
+	virtual void UpdatePos();
+
+	Vector2Df mVelocity;
+	GameObjectType mType = UNKNOWN;
+
+protected:
+	SDL_Rect mRect;
 };
 
 #endif /* GAMEOBJECT_H_ */

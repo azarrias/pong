@@ -8,8 +8,10 @@
 #ifndef MODULEENTITYMANAGER_H_
 #define MODULEENTITYMANAGER_H_
 
+#include "Ball.h"
 #include "Globals.h"
 #include "Module.h"
+#include "Paddle.h"
 #include <vector>
 
 class GameObject;
@@ -24,9 +26,9 @@ public:
 	bool Init();
 	bool Update();
 
-	GameObject *mPlayerOnePaddle;
-	GameObject *mPlayerTwoPaddle;
-	GameObject *mBall;
+	Paddle *mPlayerOnePaddle;
+	Paddle *mPlayerTwoPaddle;
+	Ball *mBall;
 private:
 	std::vector<GameObject*> mEntities;
 };

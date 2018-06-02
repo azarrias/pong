@@ -5,6 +5,9 @@
  *      Author: adolfo
  */
 
+#ifndef VECTOR2D_INL_
+#define VECTOR2D_INL_
+
 #include <cmath>
 #include <iostream>
 #include "Vector2D.h"
@@ -129,3 +132,5 @@ std::ostream& operator <<(std::ostream& output, const Vector2D<RealType>& v)
 
 typedef Vector2D<float> Vector2Df;
 typedef Vector2D<int> Vector2Di;
+
+#endif /* VECTOR2D_INL_ */

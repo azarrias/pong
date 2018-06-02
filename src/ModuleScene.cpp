@@ -37,8 +37,7 @@ bool ModuleScene::Update()
 
 bool ModuleScene::Start()
 {
-    game->mEntities->mBall->m_velocity.x = Random::GetRandom(-2, 2);
-    game->mEntities->mBall->m_velocity.y = Random::GetRandom(-2, 2);
+    game->mEntities->mBall->mVelocity.Set(Random::GetRandom(-2, 2), Random::GetRandom(-2, 2));
 
     return true;
 }

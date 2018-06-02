@@ -8,26 +8,23 @@
 #include "GameObject.h"
 #include "Globals.h"
 
-GameObject::GameObject(int xPos, int yPos, int width, int height)
-: m_velocity({ 0, 0 }), m_rect({ xPos, yPos, width, height })
-{ }
+GameObject::GameObject()
+: mVelocity({ 0, 0 }), mType(GameObjectType::UNKNOWN), mRect({ 0, 0, 0, 0 })
+{}
+
+GameObject::GameObject(GameObjectType type, int xPos, int yPos, int width, int height)
+: mVelocity({ 0, 0 }), mRect({ xPos, yPos, width, height })
+{}
+
+GameObject::~GameObject()
+{}
 
 SDL_Rect* GameObject::GetRect()
 {
-	return &m_rect;
+	return &mRect;
 }
 
 void GameObject::UpdatePos()
 {
-	m_rect.x += m_velocity.x;
-	if (m_rect.x < 0 || m_rect.x + m_rect.w > SCREEN_WIDTH)
-	{
-		m_rect.x -= m_velocity.x;
-	}
 
-	m_rect.y += m_velocity.y;
-	if (m_rect.y < 0 || m_rect.y + m_rect.h > SCREEN_HEIGHT)
-	{
-		m_rect.y -= m_velocity.y;
-	}
 }

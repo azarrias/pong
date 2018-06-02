@@ -51,10 +51,10 @@ bool ModuleInput::Update()
 					return false;
 					break;
 				case SDLK_w:
-					game->mEntities->mPlayerOnePaddle->m_velocity.y -= PADDLE_VELOCITY_DELTA;
+					game->mEntities->mPlayerOnePaddle->mVelocity.mY -= PADDLE_VELOCITY_DELTA;
 					break;
 				case SDLK_s:
-					game->mEntities->mPlayerOnePaddle->m_velocity.y += PADDLE_VELOCITY_DELTA;
+					game->mEntities->mPlayerOnePaddle->mVelocity.mY += PADDLE_VELOCITY_DELTA;
 					break;
 			}
 		}
@@ -63,10 +63,10 @@ bool ModuleInput::Update()
 			switch(e.key.keysym.sym)
 			{
 				case SDLK_w:
-					game->mEntities->mPlayerOnePaddle->m_velocity.y += PADDLE_VELOCITY_DELTA;
+					game->mEntities->mPlayerOnePaddle->mVelocity.mY += PADDLE_VELOCITY_DELTA;
 					break;
 				case SDLK_s:
-					game->mEntities->mPlayerOnePaddle->m_velocity.y -= PADDLE_VELOCITY_DELTA;
+					game->mEntities->mPlayerOnePaddle->mVelocity.mY -= PADDLE_VELOCITY_DELTA;
 					break;
 			}
 		}
