@@ -99,7 +99,7 @@ const Vector2D<RealType> operator -(Vector2D<RealType> v1, const Vector2D<RealTy
 	return v1;
 }
 
-template <class RealType>
+template <typename RealType>
 const Vector2D<RealType> operator *(Vector2D<RealType> v, RealType scalar)
 {
 	v.mX *= scalar;
@@ -107,13 +107,13 @@ const Vector2D<RealType> operator *(Vector2D<RealType> v, RealType scalar)
 	return v;
 }
 
-template <class RealType>
+template <typename RealType>
 const Vector2D<RealType> operator *(RealType scalar, Vector2D<RealType> v)
 {
 	return v * scalar;
 }
 
-template <class RealType>
+template <typename RealType>
 const Vector2D<RealType> operator /(Vector2D<RealType> v, RealType scalar)
 {
 	v.mX /= scalar;
@@ -121,8 +121,11 @@ const Vector2D<RealType> operator /(Vector2D<RealType> v, RealType scalar)
 	return v;
 }
 
-template <class RealType>
+template <typename RealType>
 std::ostream& operator <<(std::ostream& output, const Vector2D<RealType>& v)
 {
 	return v.Display(output);
 }
+
+typedef Vector2D<float> Vector2Df;
+typedef Vector2D<int> Vector2Di;

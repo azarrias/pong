@@ -10,7 +10,7 @@
 
 #include <iostream>
 
-template <class RealType = float>
+template <typename RealType>
 class Vector2D
 {
 public:
@@ -32,22 +32,22 @@ private:
 	RealType mX, mY;
 };
 
-template <class RealType = float>
+template <typename RealType>
 const Vector2D<RealType> operator +(Vector2D<RealType> v1, const Vector2D<RealType>& v2);
 
-template <class RealType = float>
+template <typename RealType>
 const Vector2D<RealType> operator -(Vector2D<RealType> v1, const Vector2D<RealType>& v2);
 
-template <class RealType = float>
+template <typename RealType>
 const Vector2D<RealType> operator *(Vector2D<RealType> v, RealType scalar);
 
-template <class RealType = float>
+template <typename RealType>
 const Vector2D<RealType> operator *(RealType scalar, Vector2D<RealType> v);
 
-template <class RealType = float>
+template <typename RealType>
 const Vector2D<RealType> operator /(Vector2D<RealType> v, RealType scalar);
 
-template <class RealType = float>
+template <typename RealType>
 std::ostream& operator <<(std::ostream& output, const Vector2D<RealType>& v);
 
 #endif /* VECTOR2D_H_ */
