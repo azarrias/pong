@@ -18,6 +18,9 @@ public:
 	bool Init();
 	bool Start();
 	bool Update();
+
+	int mPlayerOneScore = 0;
+	int mPlayerTwoScore = 0;
 };
 
 #endif /* MODULESCENE_H_ */

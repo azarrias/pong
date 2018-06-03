@@ -26,6 +26,7 @@ public:
 	virtual ~GameObject();
 
 	SDL_Rect* GetRect();
+	void SetPos(int xPos, int yPos);
 	virtual void UpdatePos();
 	virtual void UpdateVel();
 

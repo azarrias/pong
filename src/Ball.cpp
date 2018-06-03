@@ -22,16 +22,7 @@ Ball::~Ball()
 void Ball::UpdatePos()
 {
     mRect.x += mVelocity.mX;
-	if (mRect.x < 0 || mRect.x + mRect.w > SCREEN_WIDTH)
-	{
-		mRect.x -= mVelocity.mX;
-	}
-
 	mRect.y += mVelocity.mY;
-	if (mRect.y < 0 || mRect.y + mRect.h > SCREEN_HEIGHT)
-	{
-		mRect.y -= mVelocity.mY;
-	}
 }
 
 void Ball::UpdateVel()

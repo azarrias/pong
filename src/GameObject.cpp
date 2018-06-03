@@ -24,6 +24,12 @@ SDL_Rect* GameObject::GetRect()
 	return &mRect;
 }
 
+void GameObject::SetPos(int xPos, int yPos)
+{
+	mRect.x = xPos;
+	mRect.y = yPos;
+}
+
 void GameObject::UpdatePos()
 {
 
