@@ -11,13 +11,23 @@
 
 ModuleEntityManager::ModuleEntityManager()
 {
-	mPlayerOnePaddle = new Paddle(PADDLE_BORDER_OFFSET, SCREEN_HEIGHT / 2 - PADDLE_HEIGHT / 2, PADDLE_WIDTH, PADDLE_HEIGHT);
-	mPlayerTwoPaddle = new Paddle(SCREEN_WIDTH - PADDLE_BORDER_OFFSET - PADDLE_WIDTH, SCREEN_HEIGHT / 2 - PADDLE_HEIGHT / 2, PADDLE_WIDTH, PADDLE_HEIGHT);
-	mBall = new Ball(SCREEN_WIDTH / 2 - BALL_WIDTH / 2, SCREEN_HEIGHT / 2 - BALL_HEIGHT / 2, BALL_WIDTH, BALL_HEIGHT);
+	mPlayerOnePaddle = dynamic_cast<Paddle*>(CreateGameObject(GameObjectType::PADDLE,
+		PADDLE_BORDER_OFFSET,
+		SCREEN_HEIGHT / 2 - PADDLE_HEIGHT / 2,
+		PADDLE_WIDTH,
+		PADDLE_HEIGHT));
 
-	mEntities.push_back(mPlayerOnePaddle);
-	mEntities.push_back(mPlayerTwoPaddle);
-	mEntities.push_back(mBall);
+	mPlayerTwoPaddle = dynamic_cast<Paddle*>(CreateGameObject(GameObjectType::PADDLE,
+		SCREEN_WIDTH - PADDLE_BORDER_OFFSET - PADDLE_WIDTH,
+		SCREEN_HEIGHT / 2 - PADDLE_HEIGHT / 2,
+		PADDLE_WIDTH,
+		PADDLE_HEIGHT));
+
+	mBall = dynamic_cast<Ball*>(CreateGameObject(GameObjectType::BALL,
+		SCREEN_WIDTH / 2 - BALL_WIDTH / 2,
+		SCREEN_HEIGHT / 2 - BALL_HEIGHT / 2,
+		BALL_WIDTH,
+		BALL_HEIGHT));
 }
 
 ModuleEntityManager::~ModuleEntityManager()
@@ -44,6 +54,28 @@ ModuleEntityManager::~ModuleEntityManager()
 bool ModuleEntityManager::CleanUp()
 {
 	return true;
+}
+
+GameObject* ModuleEntityManager::CreateGameObject(GameObjectType type, int xPos, int yPos, int width, int height)
+{
+	static_assert(GameObjectType::UNKNOWN == 2, "Warning: Some GameObject type is not handled!");
+	GameObject* go = nullptr;
+	switch (type) {
+		case GameObjectType::BALL:
+			go = new Ball(xPos, yPos, width, height);
+			break;
+		case GameObjectType::PADDLE:
+			go = new Paddle(xPos, yPos, width, height);
+			break;
+		case GameObjectType::UNKNOWN:
+			go = new GameObject(GameObjectType::UNKNOWN, xPos, yPos, width, height);
+	}
+
+	if (go) {
+		mEntities.push_back(go);
+	}
+
+	return go;
 }
 
 bool ModuleEntityManager::Init()

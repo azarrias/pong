@@ -23,6 +23,7 @@ public:
 	~ModuleEntityManager();
 
 	bool CleanUp();
+	GameObject* CreateGameObject(GameObjectType type, int xPos, int yPos, int width, int height);
 	bool Init();
 	bool Update();
 
