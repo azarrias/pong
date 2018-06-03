@@ -87,6 +87,7 @@ bool ModuleEntityManager::Update()
 {
 	for (std::vector<GameObject*>::iterator it = mEntities.begin(); it != mEntities.end(); ++it)
 	{
+		(*it)->UpdateVel();
 		(*it)->UpdatePos();
 	}
 

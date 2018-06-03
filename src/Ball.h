@@ -18,6 +18,7 @@ public:
 	~Ball() override;
 
 	void UpdatePos() override;
+	void UpdateVel() override;
 };
 
 #endif /* BALL_H_ */

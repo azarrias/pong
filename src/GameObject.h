@@ -27,6 +27,7 @@ public:
 
 	SDL_Rect* GetRect();
 	virtual void UpdatePos();
+	virtual void UpdateVel();
 
 	Vector2Df mVelocity;
 	GameObjectType mType = UNKNOWN;

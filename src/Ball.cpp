@@ -33,3 +33,11 @@ void Ball::UpdatePos()
 		mRect.y -= mVelocity.mY;
 	}
 }
+
+void Ball::UpdateVel()
+{
+	if(mRect.y <= 0 || mRect.y + mRect.h >= SCREEN_HEIGHT)
+	{
+		mVelocity.mY = -mVelocity.mY;
+	}
+}

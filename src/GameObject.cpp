@@ -28,3 +28,8 @@ void GameObject::UpdatePos()
 {
 
 }
+
+void GameObject::UpdateVel()
+{
+
+}
