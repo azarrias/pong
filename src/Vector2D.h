@@ -22,6 +22,7 @@ public:
 	const Vector2D& operator -=(const Vector2D& otherVector);
 	const Vector2D& operator *=(RealType scalar);
 	const Vector2D& operator /=(RealType scalar);
+	const Vector2D operator -() const;
 
 	std::ostream& Display(std::ostream& output) const;
 	RealType Length() const;

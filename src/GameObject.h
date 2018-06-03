@@ -25,7 +25,8 @@ public:
 	GameObject(GameObjectType type, int xPos, int yPos, int width, int height);
 	virtual ~GameObject();
 
-	SDL_Rect* GetRect();
+	bool CheckCollision(const GameObject &other) const;
+	const SDL_Rect* GetRect() const;
 	void SetPos(int xPos, int yPos);
 	virtual void UpdatePos();
 	virtual void UpdateVel();

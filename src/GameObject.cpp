@@ -19,7 +19,12 @@ GameObject::GameObject(GameObjectType type, int xPos, int yPos, int width, int h
 GameObject::~GameObject()
 {}
 
-SDL_Rect* GameObject::GetRect()
+bool GameObject::CheckCollision(const GameObject &other) const
+{
+	return SDL_HasIntersection(GetRect(), other.GetRect());
+}
+
+const SDL_Rect* GameObject::GetRect() const
 {
 	return &mRect;
 }

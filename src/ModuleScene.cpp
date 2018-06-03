@@ -31,6 +31,12 @@ bool ModuleScene::Init()
 
 bool ModuleScene::Update()
 {
+	if(game->mEntities->mBall->CheckCollision(*game->mEntities->mPlayerOnePaddle) ||
+	   game->mEntities->mBall->CheckCollision(*game->mEntities->mPlayerTwoPaddle))
+	{
+		game->mEntities->mBall->mVelocity.mX = -game->mEntities->mBall->mVelocity.mX;
+	}
+
 	if(game->mEntities->mBall->GetRect()->x + game->mEntities->mBall->GetRect()->w < 0)
 	{
 		++mPlayerTwoScore;

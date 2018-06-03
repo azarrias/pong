@@ -60,6 +60,12 @@ const Vector2D<RealType>& Vector2D<RealType>::operator /=(RealType scalar)
 }
 
 template <typename RealType>
+const Vector2D<RealType> Vector2D<RealType>::operator -() const
+{
+	return Vector2D<RealType>(-mX, -mY);
+}
+
+template <typename RealType>
 std::ostream& Vector2D<RealType>::Display(std::ostream& output) const
 {
 	output << "(" << mX << ", " << mY << ")";
