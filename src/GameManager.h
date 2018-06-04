@@ -13,6 +13,7 @@
 #include "Module.h"
 
 class ModuleEntityManager;
+class ModuleGUI;
 class ModuleInput;
 class ModuleRender;
 class ModuleScene;
@@ -29,6 +30,7 @@ public:
 	bool Update();
 
 	ModuleEntityManager *mEntities = nullptr;
+	ModuleGUI *mGUI = nullptr;
 	ModuleInput *mInput = nullptr;
 	ModuleRender *mRenderer = nullptr;
 	ModuleScene *mScene = nullptr;

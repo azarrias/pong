@@ -8,6 +8,8 @@
 #ifndef GLOBALS_H_
 #define GLOBALS_H_
 
+#include <string>
+
 class GameManager;
 
 // Game setup constants
@@ -19,6 +21,8 @@ const int PADDLE_WIDTH = 20;
 const int BALL_HEIGHT = 20;
 const int BALL_WIDTH = 20;
 const int PADDLE_VELOCITY_DELTA = 10;
+const char * const FONT_PATH = "assets/badaboom.ttf";
+const int FONT_SIZE = 14;
 
 enum MainState
 {

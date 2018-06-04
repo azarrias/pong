@@ -9,7 +9,6 @@
 #include "GameObject.h"
 #include "Globals.h"
 #include <iostream>
-#include <SDL2/SDL_ttf.h>
 #include "Vector2D.inl"
 
 GameManager *game = nullptr;
@@ -63,15 +62,4 @@ int main(int argc, char* args[])
 		}
 	}
 }
-
-/*bool Init()
-{
-	if(TTF_Init() == -1)
-	{
-		std::cout << "SDL_ttf could not initialize! SDL_ttf Error: " << TTF_GetError() << "\n";
-		return false;
-	}
-
-	return true;
-}*/
 
