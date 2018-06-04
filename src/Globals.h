@@ -22,7 +22,9 @@ const int BALL_HEIGHT = 20;
 const int BALL_WIDTH = 20;
 const int PADDLE_VELOCITY_DELTA = 10;
 const char * const FONT_PATH = "assets/badaboom.ttf";
-const int FONT_SIZE = 14;
+const int FONT_SIZE = 50;
+const int SCORE_OFFSET_Y = 10;
+const int SCORE_OFFSET_X = 30;
 
 enum MainState
 {

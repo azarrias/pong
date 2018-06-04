@@ -20,6 +20,7 @@ public:
 	~ModuleRender();
 
 	bool CleanUp();
+	void DrawScore(int score, bool isLeftPlayer) const;
 	bool Init();
 	bool Update();
 
