@@ -56,6 +56,12 @@ bool ModuleInput::Update()
 				case SDLK_s:
 					game->mEntities->mPlayerOnePaddle->mVelocity.mY += PADDLE_VELOCITY_DELTA;
 					break;
+				case SDLK_UP:
+					game->mEntities->mPlayerTwoPaddle->mVelocity.mY -= PADDLE_VELOCITY_DELTA;
+					break;
+				case SDLK_DOWN:
+					game->mEntities->mPlayerTwoPaddle->mVelocity.mY += PADDLE_VELOCITY_DELTA;
+					break;
 			}
 		}
 		else if(e.type == SDL_KEYUP && e.key.repeat == 0)
@@ -67,6 +73,12 @@ bool ModuleInput::Update()
 					break;
 				case SDLK_s:
 					game->mEntities->mPlayerOnePaddle->mVelocity.mY -= PADDLE_VELOCITY_DELTA;
+					break;
+				case SDLK_UP:
+					game->mEntities->mPlayerTwoPaddle->mVelocity.mY += PADDLE_VELOCITY_DELTA;
+					break;
+				case SDLK_DOWN:
+					game->mEntities->mPlayerTwoPaddle->mVelocity.mY -= PADDLE_VELOCITY_DELTA;
 					break;
 			}
 		}
