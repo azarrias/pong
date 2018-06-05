@@ -5,8 +5,10 @@
  *      Author: adolfo
  */
 
-#include "Globals.h"
 #include "Ball.h"
+#include "GameManager.h"
+#include "Globals.h"
+#include "ModuleEntityManager.h"
 
 Ball::Ball()
 : GameObject()
@@ -23,6 +25,16 @@ void Ball::UpdatePos()
 {
     mRect.x += mVelocity.mX;
 	mRect.y += mVelocity.mY;
+
+    // If the ball collided with a paddle, revert its movement
+    // and modify its velocity properly
+    if(CheckCollision(*game->mEntities->mPlayerOnePaddle) ||
+       CheckCollision(*game->mEntities->mPlayerTwoPaddle))
+    {
+    	mRect.x -= mVelocity.mX;
+    	mRect.y -= mVelocity.mY;
+    	mVelocity.mX = -mVelocity.mX;
+    }
 }
 
 void Ball::UpdateVel()
