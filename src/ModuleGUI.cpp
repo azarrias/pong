@@ -36,7 +36,7 @@ bool ModuleGUI::Init()
 		return false;
 	}
 
-	mFont = TTF_OpenFont(FONT_PATH, FONT_SIZE);
+	mFont = TTF_OpenFont(FONT_PATH_NORMAL, FONT_SIZE);
 	mTextures.reserve(10);
 	SDL_Color color = { 255, 255, 255 };
 
