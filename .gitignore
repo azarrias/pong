@@ -1,10 +1,13 @@
 # Prerequisites
 *.d
 
-# Project files
+# Eclipse project files
 .project
 
-# CDT
+# Eclipse settings folder
+.settings/
+
+# Eclipse CDT
 .cproject
 .autotools
 
@@ -37,7 +40,18 @@
 *.exe
 *.out
 *.app
-/Debug/
+[Dd]ebug*/
+[Rr]elease*/
+[Bb]in/
 
-# Others
-.settings/
+# CMake
+CMakeCache.txt
+CMakeFiles
+CMakeScripts
+Testing
+Makefile
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+build/

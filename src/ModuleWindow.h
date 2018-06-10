@@ -8,7 +8,7 @@
 #ifndef MODULEWINDOW_H_
 #define MODULEWINDOW_H_
 
-#import "Module.h"
+#include "Module.h"
 
 struct SDL_Window;
 
